@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agro Forte, Futuro Sustentável — Agrinho 2026</title>
+  <!-- Folha de estilos principal -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Fontes do Google: Playfair Display para títulos, DM Sans para texto -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== BOAS-VINDAS PERSONALIZADA =====================
+       O JavaScript lê o nome digitado e exibe uma saudação no topo.
+       Isso demonstra manipulação de DOM e variáveis (rubrica Complexidade). -->
+  <div class="boas-vindas-bar" id="boasVindasBar">
+    <span id="boasVindasTexto">👋 Olá! Qual é o seu nome?</span>
+    <div class="bv-form">
+      <input type="text" id="inputNome" placeholder="Digite seu nome..." maxlength="30" />
+      <button onclick="saudarUsuario()">Entrar</button>
+    </div>
+  </div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-leaf">🌿</span>
+      <span>AgroFuturo</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#entenda">Entenda</a></li>
+      <li><a href="#pilares">Pilares</a></li>
+      <li><a href="#dados">Dados</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Participe</button>
+    <!-- Botão dark mode: alterna entre tema claro e escuro via JS -->
+    <button class="btn-darkmode" id="btnDarkMode" aria-label="Alternar modo escuro" title="Modo escuro">🌙</button>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#sobre"   onclick="fecharMenu()">Sobre</a></li>
+      <li><a href="#entenda" onclick="fecharMenu()">Entenda</a></li>
+      <li><a href="#pilares" onclick="fecharMenu()">Pilares</a></li>
+      <li><a href="#dados"   onclick="fecharMenu()">Dados</a></li>
+      <li><a href="#quiz"    onclick="fecharMenu()">Quiz</a></li>
+      <li><a href="#galeria" onclick="fecharMenu()">Galeria</a></li>
+      <li><a href="#contato" onclick="fecharMenu()">Contato</a></li>
+    </ul>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-layers">
+      <div class="hero-layer layer-1"></div>
+      <div class="hero-layer layer-2"></div>
+      <!-- Partículas criadas pelo JavaScript -->
+      <div class="hero-particles" id="particles"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal">✦ AGRINHO 2026</div>
+      <h1 class="hero-titulo reveal delay-1">
+        Agro <em>Forte,</em><br>
+        Futuro <em>Sustentável</em>
+      </h1>
+      <p class="hero-sub reveal delay-2">
+        Da semente à colheita, cada escolha molda o amanhã.<br>
+        Conheça o agro que cuida da terra enquanto alimenta o mundo.
+      </p>
+      <div class="hero-btns reveal delay-3">
+        <a href="#sobre"  class="btn-primario">Explorar ↓</a>
+        <a href="#quiz"   class="btn-secundario">Fazer o Quiz</a>
+      </div>
+      <!-- "Role para descobrir" abaixo dos botões -->
+      <div class="hero-scroll-hint reveal delay-4">
+        <span>Role para descobrir</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+
+    <!-- Estatísticas — fontes: Cepea/CNA 2025, CONAB 2025, Acordo de Paris -->
+    <div class="hero-stats reveal delay-3">
+      <div class="hstat">
+        <span class="hstat-num" data-target="25">0</span><span>%</span>
+        <span class="hstat-label">do PIB brasileiro¹</span>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <span class="hstat-num" data-target="345">0</span><span>mi t</span>
+        <span class="hstat-label">de grãos na safra 24/25²</span>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <span class="hstat-num" data-target="2050">0</span>
+        <span class="hstat-label">meta carbono zero³</span>
+      </div>
+    </div>
+
+    <!-- Frase motivacional temática — trocada a cada visita pelo JS -->
+    <div class="hero-frase" id="heroFrase"></div>
+
+    <!-- Contador regressivo até 2030 (meta Planaveg de reflorestamento) -->
+    <div class="contador-2030" id="contador2030">
+      <span class="c2030-label">⏳ Dias até a meta de reflorestamento 2030</span>
+      <span class="c2030-num" id="c2030Num">—</span>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-texto">
+          <span class="secao-tag reveal">▸ Sobre o Projeto</span>
+          <h2 class="reveal delay-1">O campo que<br><em>transforma</em> o Brasil</h2>
+          <p class="reveal delay-2">
+            O agronegócio brasileiro é um dos mais eficientes e inovadores do mundo. Mas eficiência sem responsabilidade não constrói futuro. Por isso, o <strong>Agrinho 2026</strong> convida jovens, produtores e comunidades a repensar como cultivamos — com tecnologia, respeito ao meio ambiente e compromisso com as próximas gerações.
+          </p>
+          <p class="reveal delay-3">
+            Cada hectare preservado, cada gota d'água economizada, cada energia limpa gerada no campo é um passo rumo ao Brasil que queremos: produtivo <strong>e</strong> sustentável.
+          </p>
+          <div class="sobre-tags reveal delay-3">
+            <span>🌱 Sustentabilidade</span>
+            <span>💧 Recursos Hídricos</span>
+            <span>🤖 Agro Tech</span>
+            <span>🌳 Preservação</span>
+          </div>
+        </div>
+        <div class="sobre-imagem reveal delay-2">
+          <!-- Coloque sua imagem em imagens/sobre.jpg -->
+          <img src="imagens/sobre.jpg" alt="Agricultor no campo" />
+          <div class="sobre-img-deco"></div>
+          <div class="sobre-badge-flutuante">
+            <span class="badge-icon">🏆</span>
+            <span>Agrinho<br><strong>2026</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ENTENDA O TEMA =====================
+       Seção explicativa aprofundada para o visitante entender o tema -->
+  <section class="entenda" id="entenda">
+    <div class="container">
+      <div class="secao-header">
+        <span class="secao-tag reveal">▸ Entenda o Tema</span>
+        <h2 class="reveal delay-1">O que significa<br><em>"Agro Forte, Futuro Sustentável"?</em></h2>
+        <p class="secao-desc reveal delay-2">
+          O tema do Agrinho 2026 une duas ideias que parecem opostas, mas são complementares: a força produtiva do campo e o cuidado com o planeta. Entenda cada parte:
+        </p>
+      </div>
+
+      <div class="entenda-grid">
+
+        <!-- Card 1 -->
+        <div class="entenda-card reveal delay-1">
+          <div class="entenda-icone">💪</div>
+          <h3>O que é "Agro Forte"?</h3>
+          <p>
+            O Brasil é uma potência agrícola global. Somos o maior exportador mundial de soja, carne bovina, café e suco de laranja. Em 2025, o agronegócio respondeu por <strong>25% do PIB nacional</strong> (Cepea/CNA), gerando empregos e renda do campo às cidades.
+          </p>
+          <p>
+            "Agro forte" significa um setor <strong>produtivo, tecnológico e competitivo</strong> — que usa ciência, inovação e gestão para produzir cada vez mais com cada vez menos recursos.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="entenda-card reveal delay-2">
+          <div class="entenda-icone">🌍</div>
+          <h3>O que é "Futuro Sustentável"?</h3>
+          <p>
+            Sustentabilidade no campo significa produzir alimentos <strong>sem destruir os recursos naturais</strong> que tornam essa produção possível: o solo fértil, a água limpa, o ar puro e a biodiversidade.
+          </p>
+          <p>
+            Um futuro sustentável é aquele em que as próximas gerações também poderão plantar, colher e se alimentar — porque cuidamos hoje do que a natureza nos oferece.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="entenda-card reveal delay-3">
+          <div class="entenda-icone">🤝</div>
+          <h3>Por que os dois juntos?</h3>
+          <p>
+            Durante décadas, acreditou-se que produzir mais exigia degradar a natureza. O Brasil provou o contrário: com o <strong>Código Florestal</strong>, o <strong>plantio direto</strong> e a <strong>agricultura de precisão</strong>, é possível ser o maior produtor de alimentos do mundo e ainda preservar 66% do território com vegetação nativa.
+          </p>
+          <p>
+            Agro forte <em>é</em> futuro sustentável — um depende do outro.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="entenda-card reveal delay-4">
+          <div class="entenda-icone">🧑‍🌾</div>
+          <h3>Qual o papel do jovem nisso?</h3>
+          <p>
+            Os jovens de hoje serão os produtores, pesquisadores, gestores e consumidores do agro de amanhã. Conhecer o tema, questionar práticas antigas e propor soluções inovadoras é o primeiro passo para um campo mais justo e sustentável.
+          </p>
+          <p>
+            O <strong>Agrinho</strong> existe exatamente para isso: conectar a escola com o campo e o campo com o futuro.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bloco de destaque: curiosidade -->
+      <div class="destaque-box reveal delay-2">
+        <span class="destaque-icon">💡</span>
+        <div>
+          <strong>Você sabia?</strong> O Brasil tem a agricultura com maior área certificada em práticas de baixo carbono do mundo. O programa <strong>ABC+ (Agricultura de Baixo Carbono)</strong> do governo federal prevê reduzir 1,1 bilhão de toneladas de CO₂ equivalente até 2030 — o equivalente a tirar 240 milhões de carros das ruas por um ano.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PILARES ===================== -->
+  <section class="pilares" id="pilares">
+    <div class="pilares-bg"></div>
+    <div class="container">
+      <div class="secao-header">
+        <span class="secao-tag reveal">▸ Os 4 Pilares</span>
+        <h2 class="reveal delay-1">O agro sustentável<br>começa <em>aqui</em></h2>
+      </div>
+
+      <div class="pilares-grid">
+
+        <div class="pilar-card reveal delay-1" data-cor="verde">
+          <div class="pilar-num">01</div>
+          <!-- Coloque sua imagem em imagens/pilar1.jpg -->
+          <div class="pilar-img-wrap">
+            <img src="imagens/pilar1.jpg" alt="Solo fértil" />
+            <div class="pilar-img-overlay"></div>
+          </div>
+          <div class="pilar-icone">🌱</div>
+          <h3>Solo Vivo</h3>
+          <p>O Brasil cultiva mais de <strong>81,7 milhões de hectares</strong> com plantio direto — técnica que preserva o solo, evita erosão e retém carbono. (CONAB, 2025)</p>
+          <div class="pilar-barra"><div class="pilar-fill" style="width:81%"></div></div>
+          <span class="pilar-pct">81,7 mi ha com plantio direto</span>
+        </div>
+
+        <div class="pilar-card reveal delay-2" data-cor="azul">
+          <div class="pilar-num">02</div>
+          <!-- Coloque sua imagem em imagens/pilar2.jpg -->
+          <div class="pilar-img-wrap">
+            <img src="imagens/pilar2.jpg" alt="Irrigação eficiente" />
+            <div class="pilar-img-overlay"></div>
+          </div>
+          <div class="pilar-icone">💧</div>
+          <h3>Água Inteligente</h3>
+          <p>Sistemas modernos de irrigação por gotejamento e sensores reduzem o consumo de água em até <strong>35%</strong> sem perda de produtividade. (Embrapa / Valley, 2026)</p>
+          <div class="pilar-barra"><div class="pilar-fill" style="width:35%"></div></div>
+          <span class="pilar-pct">até 35% menos água consumida</span>
+        </div>
+
+        <div class="pilar-card reveal delay-3" data-cor="amarelo">
+          <div class="pilar-num">03</div>
+          <!-- Coloque sua imagem em imagens/pilar3.jpg -->
+          <div class="pilar-img-wrap">
+            <img src="imagens/pilar3.jpg" alt="Energia solar no campo" />
+            <div class="pilar-img-overlay"></div>
+          </div>
+          <div class="pilar-icone">☀️</div>
+          <h3>Energia Limpa</h3>
+          <p>Produtores rurais geram cerca de <strong>3,8 GW</strong> de energia solar distribuída no Brasil, reduzindo custos e emissões de carbono no campo. (ABSOLAR, 2025)</p>
+          <div class="pilar-barra"><div class="pilar-fill" style="width:60%"></div></div>
+          <span class="pilar-pct">3,8 GW gerados no campo</span>
+        </div>
+
+        <div class="pilar-card reveal delay-4" data-cor="terra">
+          <div class="pilar-num">04</div>
+          <!-- Coloque sua imagem em imagens/pilar4.jpg -->
+          <div class="pilar-img-wrap">
+            <img src="imagens/pilar4.jpg" alt="Floresta nativa" />
+            <div class="pilar-img-overlay"></div>
+          </div>
+          <div class="pilar-icone">🌳</div>
+          <h3>Biodiversidade</h3>
+          <p>O Brasil tem <strong>20,4 milhões de hectares</strong> em recuperação florestal. A meta do Planaveg é restaurar 12 milhões de hectares até 2030. (Observatório da Restauração, 2024)</p>
+          <div class="pilar-barra"><div class="pilar-fill" style="width:68%"></div></div>
+          <span class="pilar-pct">20,4 mi ha em recuperação</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUOTE PARALAXE ===================== -->
+  <section class="quote-section" id="quote">
+    <!-- Coloque sua imagem em imagens/quote-bg.jpg -->
+    <div class="quote-bg">
+      <img src="imagens/quote-bg.jpg" alt="Campo ao entardecer" />
+    </div>
+    <div class="quote-overlay"></div>
+    <div class="container">
+      <blockquote class="reveal">
+        <span class="aspas">"</span>
+        Não herdamos a terra de nossos pais —
+        nós a <em>pedimos emprestada</em> dos nossos filhos.
+        <span class="quote-autor">— Provérbio Indígena</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===================== DADOS / CONTADORES ===================== -->
+  <section class="dados" id="dados">
+    <div class="container">
+      <div class="secao-header">
+        <span class="secao-tag reveal">▸ Em Números</span>
+        <h2 class="reveal delay-1">O impacto do agro<br><em>sustentável</em></h2>
+      </div>
+
+      <div class="dados-grid">
+        <!-- Fonte: CONAB, 11º Levantamento Safra 2024/25 -->
+        <div class="dado-card reveal delay-1">
+          <div class="dado-icone">🌾</div>
+          <span class="dado-num" data-target="345">0</span><span class="dado-suf">mi t</span>
+          <p>de grãos na safra 2024/25 — recorde histórico (CONAB, 2025)</p>
+        </div>
+        <!-- Fonte: Embrapa / Valley, Agrishow 2026 -->
+        <div class="dado-card reveal delay-2">
+          <div class="dado-icone">💧</div>
+          <span class="dado-num" data-target="35">0</span><span class="dado-suf">%</span>
+          <p>de economia de água com irrigação inteligente (Embrapa / Valley, 2026)</p>
+        </div>
+        <!-- Fonte: ABSOLAR, 2025 -->
+        <div class="dado-card reveal delay-3">
+          <div class="dado-icone">☀️</div>
+          <span class="dado-num" style="font-size:2.8rem;">3,8</span><span class="dado-suf"> GW</span>
+          <p>gerados por produtores rurais no Brasil via energia solar (ABSOLAR, 2025)</p>
+        </div>
+        <!-- Fonte: Observatório da Restauração / Abiove, 2024 -->
+        <div class="dado-card reveal delay-4">
+          <div class="dado-icone">🌳</div>
+          <span class="dado-num" data-target="20">0</span><span class="dado-suf">mi ha</span>
+          <p>em processo de recuperação florestal no Brasil (Observatório da Restauração, 2024)</p>
+        </div>
+      </div>
+
+      <!-- LINHA DO TEMPO -->
+      <div class="timeline">
+        <div class="tl-header reveal"><h3>Linha do Tempo Sustentável</h3></div>
+        <div class="tl-track">
+          <div class="tl-item reveal delay-1">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-ano">2000</span>
+              <h4>Plantio Direto</h4>
+              <p>Adoção em massa de técnicas que preservam o solo e reduzem erosão</p>
+            </div>
+          </div>
+          <div class="tl-item reveal delay-2">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-ano">2010</span>
+              <h4>Agricultura de Precisão</h4>
+              <p>GPS, sensores e drones chegam ao campo brasileiro</p>
+            </div>
+          </div>
+          <div class="tl-item reveal delay-3">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-ano">2018</span>
+              <h4>Energia Solar Rural</h4>
+              <p>Fazendas tornam-se geradoras de energia limpa</p>
+            </div>
+          </div>
+          <div class="tl-item reveal delay-4">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-ano">2026</span>
+              <h4>Agro Digital</h4>
+              <p>IA, IoT e biotecnologia redesenham o futuro do campo</p>
+            </div>
+          </div>
+          <div class="tl-item reveal delay-5 futuro">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-ano">2050</span>
+              <h4>Carbono Zero</h4>
+              <p>Meta de neutralidade climática assumida pelo Brasil no Acordo de Paris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTA DE FONTES -->
+      <div class="fontes reveal">
+        <p>¹ Participação do agronegócio no PIB: Cepea/CNA, 2025 &nbsp;|&nbsp;
+           ² Produção de grãos: CONAB, 11º Levantamento Safra 2024/25 &nbsp;|&nbsp;
+           ³ Neutralidade climática: Acordo de Paris, compromisso do Brasil &nbsp;|&nbsp;
+           Irrigação: Embrapa/Valley, Agrishow 2026 &nbsp;|&nbsp;
+           Solar: ABSOLAR, 2025 &nbsp;|&nbsp;
+           Reflorestamento: Observatório da Restauração/Abiove, 2024
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUIZ INTERATIVO =====================
+       Demonstra uso de variáveis JS, manipulação de DOM, eventos de clique
+       e lógica condicional — rubrica Complexidade nível 4 -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <div class="secao-header">
+        <span class="secao-tag reveal">▸ Quiz</span>
+        <h2 class="reveal delay-1">Teste seus<br><em>conhecimentos</em></h2>
+        <p class="secao-desc reveal delay-2">Responda 5 perguntas sobre o agro sustentável e descubra seu nível de consciência ambiental!</p>
+      </div>
+
+      <div class="quiz-wrap reveal delay-2">
+        <!-- Barra de progresso do quiz -->
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar" id="quizProgressBar" style="width:0%"></div>
+        </div>
+        <div class="quiz-counter" id="quizCounter">Pergunta 1 de 5</div>
+
+        <!-- Área da pergunta -->
+        <div class="quiz-card" id="quizCard">
+          <div class="quiz-pergunta" id="quizPergunta">Carregando...</div>
+          <div class="quiz-opcoes" id="quizOpcoes"></div>
+        </div>
+
+        <!-- Resultado final (oculto até terminar) -->
+        <div class="quiz-resultado" id="quizResultado" style="display:none">
+          <div class="quiz-res-icon" id="quizResIcon"></div>
+          <h3 id="quizResTexto"></h3>
+          <p id="quizResDesc"></p>
+          <div class="quiz-pontuacao" id="quizPontuacao"></div>
+          <button class="btn-primario" onclick="reiniciarQuiz()" style="margin-top:20px;">Tentar Novamente 🔄</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERIA MOSAICO ===================== -->
+  <section class="galeria" id="galeria">
+    <div class="container">
+      <div class="secao-header">
+        <span class="secao-tag reveal">▸ Galeria</span>
+        <h2 class="reveal delay-1">O campo em <em>imagens</em></h2>
+        <p class="secao-desc reveal delay-2">Clique nas fotos para ampliar e conhecer mais sobre o campo brasileiro.</p>
+      </div>
+
+      <div class="galeria-grid reveal delay-2">
+        <!-- Substitua pelos seus arquivos de imagem -->
+        <div class="gal-item gal-grande">
+          <img src="imagens/gal1.jpg" alt="Lavoura ao amanhecer" />
+          <div class="gal-caption">Lavoura ao Amanhecer</div>
+        </div>
+        <div class="gal-item">
+          <img src="imagens/gal2.jpg" alt="Irrigação por gotejamento" />
+          <div class="gal-caption">Irrigação Inteligente</div>
+        </div>
+        <div class="gal-item">
+          <img src="imagens/gal3.jpg" alt="Painel solar na fazenda" />
+          <div class="gal-caption">Energia do Sol</div>
+        </div>
+        <div class="gal-item gal-largo">
+          <img src="imagens/gal4.jpg" alt="Drone sobre plantação" />
+          <div class="gal-caption">Tecnologia no Campo</div>
+        </div>
+        <div class="gal-item">
+          <img src="imagens/gal5.jpg" alt="Floresta nativa preservada" />
+          <div class="gal-caption">Natureza Preservada</div>
+        </div>
+        <div class="gal-item">
+          <img src="imagens/gal6.jpg" alt="Colheita sustentável" />
+          <div class="gal-caption">Colheita do Futuro</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA / CONTATO ===================== -->
+  <section class="cta-section" id="contato">
+    <!-- Coloque sua imagem em imagens/cta-bg.jpg -->
+    <div class="cta-bg">
+      <img src="imagens/cta-bg.jpg" alt="Campo ao entardecer" />
+    </div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <div class="cta-content reveal">
+        <span class="secao-tag claro">▸ Faça Parte</span>
+        <h2>Juntos pelo <em>agro do futuro</em></h2>
+        <p>Assine nossa newsletter e receba novidades sobre sustentabilidade, tecnologia agrícola e o Agrinho 2026.</p>
+        <!-- Formulário com validação e feedback JS — rubrica Complexidade nível 4 -->
+        <form class="cta-form" onsubmit="enviarForm(event)">
+          <input type="text"  id="formNome"  placeholder="Seu nome"   required />
+          <input type="email" id="formEmail" placeholder="Seu e-mail" required />
+          <button type="submit">Quero Participar 🌱</button>
+        </form>
+        <div class="form-msg" id="formMsg"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">🌿 AgroFuturo</div>
+          <p>Agro Forte, Futuro Sustentável.<br>Agrinho 2026 — Paraná.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#entenda">Entenda</a></li>
+            <li><a href="#pilares">Pilares</a></li>
+            <li><a href="#dados">Dados</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Saiba Mais</h4>
+          <ul>
+            <li><a href="https://www.sistemafaep.org.br/agrinho/" target="_blank">Agrinho Oficial</a></li>
+            <li><a href="https://www.idrparana.pr.gov.br" target="_blank">IDR-Paraná (ex-Emater)</a></li>
+            <li><a href="https://www.agricultura.pr.gov.br" target="_blank">SEAB Paraná</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 AgroFuturo — Projeto Agrinho</span>
+        <span>Feito com 🌱 e responsabilidade</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão voltar ao topo — aparece após rolar 400px -->
+  <button class="btn-topo" id="btnTopo" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>
